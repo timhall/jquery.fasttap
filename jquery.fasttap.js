@@ -111,7 +111,7 @@
 
         // Register event handlers
         if (touchSupported) { $element.on('touchstart', handlers.onTouchStart); }
-        $element.on('click', handlers.onClick);
+        if (options && options.callback) { $element.on('click', handlers.onClick); }
 
         return this;
     };
