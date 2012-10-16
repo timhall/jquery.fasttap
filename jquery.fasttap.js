@@ -48,72 +48,70 @@
     $(document).on('click', clickbuster.onClick);
 
     $.fn.fasttap = function (options) {
-        if (touchSupported) {
-            var $element = this,
-                handlers = (function () {
-                    var startX, startY,
-                        threshold = 10,
-                        onTouchStart = function (event) {
-                            event.stopPropagation();
+        var $element = this,
+            handlers = (function () {
+                var startX, startY,
+                    threshold = 10,
+                    onTouchStart = function (event) {
+                        event.stopPropagation();
 
-                            $(event.target).on('touchend', onClick);
-                            $('body').on('touchmove', onTouchMove);
+                        $(event.target).on('touchend', onClick);
+                        $('body').on('touchmove', onTouchMove);
                             
-                            startX = event.originalEvent.touches[0].clientX;
-                            startY = event.originalEvent.touches[0].clientY;
-                        },
+                        startX = event.originalEvent.touches[0].clientX;
+                        startY = event.originalEvent.touches[0].clientY;
+                    },
 
-                        onTouchMove = function (event) {
-                            if (Math.abs(event.originalEvent.touches[0].clientX - startX) > threshold ||
-                                Math.abs(event.originalEvent.touches[0].clientY - startY) > threshold) {
-                                reset();
-                            }
-                        },
-
-                        onClick = function (event) {
-                            event.stopPropagation();
-                            event.preventDefault();
+                    onTouchMove = function (event) {
+                        if (Math.abs(event.originalEvent.touches[0].clientX - startX) > threshold ||
+                            Math.abs(event.originalEvent.touches[0].clientY - startY) > threshold) {
                             reset();
+                        }
+                    },
 
-                            if (options && typeof options.callback === 'function') {
-                                // If callback is defined, call it
-                                options.callback(event);
-                            } else if (event.type == 'touchend') {
-                                // Otherwise, perform default click event for tap
-                                fireEvent(event.target, 'click');
-                            }
-
-                            if (event.type == 'touchend') {
-                                clickbuster.preventGhostClick(startX, startY);
-                            }
-                        },
-
-                        reset = function () {
-                            $element.off('touchend', onClick);
-                            $('body').off('touchmove', onTouchMove);
-                        },
-
-                        handleEvent = function (event) {
-                            switch (event.type) {
-                                case 'touchstart': onTouchStart(event); break;
-                                case 'touchmove': onTouchMove(event); break;
-                                case 'touchend': onClick(event); break;
-                                case 'click': onClick(event); break;
-                            }
+                    onClick = function (event) {
+                        event.stopPropagation();
+                        event.preventDefault();
+                        reset();
+                        
+                        if (options && typeof options.callback === 'function') {
+                            // If callback is defined, call it
+                            options.callback(event);
+                        } else if (event.type == 'touchend') {
+                            // Otherwise, perform default click event for tap
+                            fireEvent(event.target, 'click');
                         }
 
-                    return {
-                        onTouchStart: onTouchStart,
-                        onTouchMove: onTouchMove,
-                        onClick: onClick,
-                        handleEvent: handleEvent
-                    }
-                })()
+                        if (event.type == 'touchend') {
+                            clickbuster.preventGhostClick(startX, startY);
+                        }
+                    },
 
-            // Register event handlers
-            $element.on('touchstart', handlers.onTouchStart);
-            $element.on('click', handlers.onClick);
-        }
+                    reset = function () {
+                        $element.off('touchend', onClick);
+                        $('body').off('touchmove', onTouchMove);
+                    },
+
+                    handleEvent = function (event) {
+                        switch (event.type) {
+                            case 'touchstart': onTouchStart(event); break;
+                            case 'touchmove': onTouchMove(event); break;
+                            case 'touchend': onClick(event); break;
+                            case 'click': onClick(event); break;
+                        }
+                    }
+
+                return {
+                    onTouchStart: onTouchStart,
+                    onTouchMove: onTouchMove,
+                    onClick: onClick,
+                    handleEvent: handleEvent
+                }
+            })()
+
+        // Register event handlers
+        if (touchSupported) { $element.on('touchstart', handlers.onTouchStart); }
+        $element.on('click', handlers.onClick);
 
         return this;
     };
