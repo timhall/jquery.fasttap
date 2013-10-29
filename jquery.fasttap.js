@@ -76,7 +76,7 @@
                         
                         if (options && typeof options.callback === 'function') {
                             // If callback is defined, call it
-                            options.callback(event);
+                            options.callback.call(this, event);
                         } else if (event.type == 'touchend') {
                             // Otherwise, perform default click event for tap
                             fireEvent(event.target, 'click');
