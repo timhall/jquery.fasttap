@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+  <title>jquery.fasttap</title>
+  <style>
+    html {
+      font-family: sans-serif;
+      font-size: 14px;
+    }
+    body {
+      padding: 10px 20px;
+    }
+    .download {
+      display: inline-block;
+      padding: 0.5em 1em;
+      background-color: #008A00;
+      color: white;
+      text-decoration: none;
+    }
+    .download:hover {
+      background-color: #007c00;
+    }
+    [role="button"] {
+      display: inline-block;
+      padding: 0.5em 1em;
+      cursor: pointer;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .slow {
+      background: red;
+      color: white;
+    }
+    .fast {
+      background: green;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <a class="download" href="https://github.com/timhall/jquery.fasttap">Download jquery.fasttap</a>
+  
+  <div class="example">
+    <p>Click? <span class="click"></span></p>
+    <p>Clicks: <span class="clicks">0</span></p>
+    <a role="button" class="slow">Slow</a>
+    <a role="button" class="fast">Fast</a>
+  </div>
+  
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="jquery.fasttap.js"></script>
+  <script type="text/javascript">
+    (function($) {
+      $(function() {
+        $('.fast').fasttap();
+        
+        var start, end, elapsed;
+        var $button = $('[role="button"]');
+        var $click = $('.click');
+        var $clicks = $('.clicks');
+        
+        $button.on('touchstart', function(e) {
+          
+        });
+        $button.on('touchend', function(e) {
+          start = new Date();
+        });
+        $button.on('click', function(e) {
+          if (start) {
+            elapsed = new Date() - start;
+          } else {
+            elapsed = 'No touch detected';
+          }
+        
+          $click.text('Click! (' + elapsed + ')');
+          $clicks.text(+$clicks.text() + 1);
+        
+          start = null;
+          end = null;
+        });
+      });
+    })(jQuery);
+  </script>
+</body>
+</html>
