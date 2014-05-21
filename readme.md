@@ -15,6 +15,10 @@ $('.fast').fasttap({
 
 Based heavily on Google's recommendations for creating fast buttons, Fasttap does its best to ignore scrolling and other dragging and preventing ghost clicks that can occur if the click event is still called after being handled in the tap event. All for about 600 bytes once minified and gzipped!
 
+Example:
+
+http://timhall.github.io/jquery.fasttap/
+
 References:
 
 [Creating Fast Buttons for Mobile Web Applications](https://developers.google.com/mobile/articles/fast_buttons)
