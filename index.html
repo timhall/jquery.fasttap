@@ -79,8 +79,8 @@
         <label><input type="radio" name="slow-radio">Too</label>
       </li>
       <li>
-        <label><input type="radio" name="fast-radio">Fast</label>
-        <label><input type="radio" name="fast-radio">Radios!</label>
+        <label class="fast-radio"><input type="radio" name="fast-radio">Fast</label>
+        <label class="fast-radio"><input type="radio" name="fast-radio">Radios!</label>
       </li>
     </ul>
   </div>
@@ -96,7 +96,7 @@
         var start, end, elapsed;
         
         // Make the default click event fast!
-        $('.fast-default, .fast-checkbox, [name="fast-radio"]').fasttap();
+        $('.fast-default, .fast-checkbox, .fast-radio').fasttap();
         
         // Also fast (with callback)
         $('.fast-callback').fasttap({
