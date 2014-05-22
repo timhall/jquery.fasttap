@@ -100,7 +100,8 @@
         function onClick(e) {
           if (start) {
             elapsed = new Date() - start;
-          } else {
+          }
+          if (!elapsed || elapsed < 10) {
             elapsed = 'Instant!';
           }
         
@@ -109,6 +110,7 @@
         
           start = null;
           end = null;
+          elapsed = null;
         }        
       });
     })(jQuery);
