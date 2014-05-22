@@ -73,6 +73,15 @@
       <li><a role="button" class="fast fast-callback">Also Fast</a> Fast click with callback parameter</li>
       <li><label for="slow-checkbox-example"><input type="checkbox" id="slow-checkbox-example"> Delay is on checkboxes too</label>
       <li><label class="fast-checkbox" for="fast-checkbox-example"><input class="fast-checkbox" type="checkbox" id="fast-checkbox-example"> Fast checkbox!</label>
+      <li>
+        <label><input type="radio" name="slow-radio">Radio</label>
+        <label><input type="radio" name="slow-radio">Delayed</label>
+        <label><input type="radio" name="slow-radio">Too</label>
+      </li>
+      <li>
+        <label><input type="radio" name="fast-radio">Fast</label>
+        <label><input type="radio" name="fast-radio">Radios!</label>
+      </li>
     </ul>
   </div>
   
@@ -87,7 +96,7 @@
         var start, end, elapsed;
         
         // Make the default click event fast!
-        $('.fast-default, .fast-checkbox').fasttap();
+        $('.fast-default, .fast-checkbox, [name="fast-radio"]').fasttap();
         
         // Also fast (with callback)
         $('.fast-callback').fasttap({
