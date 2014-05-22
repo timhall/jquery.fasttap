@@ -62,7 +62,7 @@
 <body>
   <div class="header">
     <a class="download" href="https://github.com/timhall/jquery.fasttap">Download jquery.fasttap</a>
-    <p class="description">Make the default click behavior fast on touch devices</p>
+    <p class="description">Make the default click behavior fast on touch devices!</p>
   </div>
   <div class="example">
     <p>Click? <span class="click"></span></p>
@@ -71,6 +71,7 @@
       <li><a role="button" class="slow">Slow</a> 200+ ms delay is default on touch devices</li>
       <li><a role="button" class="fast fast-default">Fast</a> Make the default click behavior fast on touch devices</li>
       <li><a role="button" class="fast fast-callback">Also Fast</a> Fast click with callback parameter</li>
+      <li><label for="checkbox-example"><input type="checkbox" id="checkbox-example"> Checkboxes can be fast too</label>
     </ul>
   </div>
   
@@ -85,7 +86,7 @@
         var start, end, elapsed;
         
         // Make the default click event fast!
-        $('.fast-default').fasttap();
+        $('.fast-default, label').fasttap();
         
         // Also fast (with callback)
         $('.fast-callback').fasttap({
