@@ -55,8 +55,8 @@
                     onTouchStart = function (event) {
                         event.stopPropagation();
 
-                        $(event.target).on('touchend', onClick);
-                        $('body').on('touchmove', onTouchMove);
+                        $(event.target).off('touchend').on('touchend', onClick);
+                        $('body').off('touchmove').on('touchmove', onTouchMove);
                             
                         startX = event.originalEvent.touches[0].clientX;
                         startY = event.originalEvent.touches[0].clientY;
